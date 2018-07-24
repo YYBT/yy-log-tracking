@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div onclick="login()">登录</div>
+    <div onclick="global()">设置全局</div>
+    <div onclick="test()">test数据</div>
+    <script type="text/javascript" src="/loghub-tracking.js"></script>
+</body>
+<script>
+    // init
+    var logger = new window.Tracker(
+        'cn-hangzhou.log.aliyuncs.com',
+        'test-mingren',
+        'test'
+    )
+    // 打开log
+    logger.openlog(true)
+    // 测试打点
+    logger.pushObj('map_onshow', {
+        paster_name: '打开地图',
+        type: 'web'
+    })
+
+    function login() {
+        // 登录用户
+        logger.registerUserid('123')
+    }
+
+    function global() {
+        // 全局参数
+        logger.registerPage({
+            version: '1.0',
+            mall_name: '商场名字',
+            machine_code: 'M030064',
+            scene: '地图'
+        })
+    }
+
+    function test() {
+        // 测试打点
+        logger.pushObj('map_test', {
+            paster_name: '地图测试埋点',
+            type: 'web'
+        })
+    }
+</script>
+
+</html>
