@@ -106,10 +106,8 @@
         },
         //生成唯一id
         getLutrackid() {
-          
             var id = null
             if(this.is_weixin()){
-                
                 if (this.getCookie(lutrackidstring)) {
                     id = this.getCookie(lutrackidstring)
                 } else {
@@ -124,7 +122,6 @@
                     localStorage.lutrackid = id
                 }
             }
-            alert(id)
             return id;
         },
         //注册全局参数
@@ -143,13 +140,27 @@
         },
         // 发送数据
         pushObj: function (eventName, obj) {
-            this.push(lutrackidstring, this.getLutrackid())
             this.push(eventNamestring, eventName)
             var keys = Object.keys(obj)
             for (var i = 0; i <= keys.length; i++) {
                 this.push(keys[i], obj[keys[i]])
             }
 
+            var localStorage = this.getlocalStorage()
+            var localkeys = Object.keys(localStorage)
+            for (var j = 0; j <= localkeys.length; j++) {
+                this.push(localkeys[j], localStorage[localkeys[j]])
+            }
+
+            if (this.openlog) {
+                console.log(this.params_)
+            }
+            this.logger()
+        },
+        // 发送数据
+        pushJson: function (eventName, obj) {
+            obj['eventName'] = eventName
+            this.push('event', JSON.stringify(obj))
             var localStorage = this.getlocalStorage()
             var localkeys = Object.keys(localStorage)
             for (var j = 0; j <= localkeys.length; j++) {

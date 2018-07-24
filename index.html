@@ -24,7 +24,7 @@
     // 打开log
     logger.openlog(true)
     // 测试打点
-    logger.pushObj('map_onshow', {
+    logger.pushJson('map_onshow', {
         paster_name: '打开地图',
         type: 'web'
     })
@@ -46,7 +46,7 @@
 
     function test() {
         // 测试打点
-        logger.pushObj('map_test', {
+        logger.pushJson('map_test', {
             paster_name: '地图测试埋点',
             type: 'web'
         })
